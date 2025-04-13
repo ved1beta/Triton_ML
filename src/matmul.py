@@ -166,6 +166,6 @@ def matmul_kernel(
     c_mask = (offs_cm[:, None] < M) & (offs_cn[None, :] < N)
     tl.store(c_ptrs, c, mask=c_mask)
 
-    @triton.jit
-    def leaky_relu(x):
-        return tl.where(x >= 0, x, 0.01 * x)
+@triton.jit
+def leaky_relu(x):
+    return tl.where(x >= 0, x, 0.01 * x)
